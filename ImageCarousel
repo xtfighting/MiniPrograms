@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8">
+<title>see you</title>
+<link href="common.css" type="text/css" rel="stylesheet"/>
+</head>
+<style type="text/css">
+#lunfan{
+
+}
+#lunfan img{
+	position: absolute;
+}
+</style>
+<body>
+<div id="lunfan">
+	<img src="http://a3.qpic.cn/psb?/V1139r913HKjE6/Eveyslt8KxNuN9JQIs9ju77aa9pbmrx4cokGeSAD*jU!/b/dB8BAAAAAAAA&bo=CAIjAQAAAAARAB8!&rf=viewer_4"/>
+	<img src="http://a1.qpic.cn/psb?/V1139r913HKjE6/L*pHprEKr15yR14IrIWeHwgM5ChWVGuKtxRKwgEZ8Eg!/b/dPYAAAAAAAAA&bo=CAIkAQAAAAARABg!&rf=viewer_4"/>
+	<img src="http://a1.qpic.cn/psb?/V1139r913HKjE6/wljjY4gPTohJWb4ILdVwMYmCY54Wu6Nvazq775KIVGQ!/b/dCABAAAAAAAA&bo=CAIkAQAAAAARABg!&rf=viewer_4"/>
+</div>
+<script type="text/javascript">
+  var imgWidth = 520;  //图片的宽度
+  var imgArray = document.getElementById('lunfan').getElementsByTagName('img');  //获取轮番图所有的图片Array
+  for(var i=0;i<imgArray.length;i++){
+  	//imgArray[i].style.left = imgWidth*i+'px';
+  	if(i>0){
+  		imgArray[i].style.display = 'none';
+  	}
+  }
+  setInterval("goOn()",1000);
+  function goOn(){
+  	for(var i=0;i<imgArray.length;i++){
+
+  		if(imgArray[i].style.display!= 'none'){
+  			if(i==imgArray.length-1){
+  				imgArray[i].style.display = 'none';
+  				imgArray[0].style.display = 'block';
+  			}else{
+  				imgArray[i].style.display = 'none';
+  				imgArray[i+1].style.display = 'block';
+  			}
+  			break;
+  		}
+  	}
+  }
+</script>
+</body>
