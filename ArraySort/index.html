@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8" lang="zh-cn">
+<title>test</title>
+</head>
+<style>
+*{
+	margin: 0;
+	padding: 0;
+}
+th,td{
+	padding:5px;
+}
+#content{
+	margin: 5px;
+	width:100px;
+	height:100px;
+}
+#num:hover{
+    cursor: pointer;
+}
+</style>
+<body>
+<div id="content">
+  <h2>点击num</h2>
+  <table id="tb" border="1" cellspacing="0" cellpadding="0" >
+    <tr>
+      <th>name</th>
+      <th>month</th>
+      <th id="num" title="从大到小排列" onclick="arrange()">num</th>
+    </tr>
+   <tr>
+      <td>Tom</td>
+      <td>January</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <td>Jar</td>
+      <td>March</td>
+      <td>70</td>
+    </tr>
+    <tr>
+      <td>Sun</td>
+      <td>June</td>
+      <td>150</td>
+    </tr>
+    <tr>
+      <td>om</td>
+      <td>anuary</td>
+      <td>140</td>
+    </tr>
+    <tr>
+      <td>ar</td>
+      <td>arch</td>
+      <td>702</td>
+    </tr>
+    <tr>
+      <td>Tom</td>
+      <td>January</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <td>Jar</td>
+      <td>March</td>
+      <td>70</td>
+    </tr>
+    <tr>
+      <td>Sun</td>
+      <td>June</td>
+      <td>150</td>
+    </tr>
+    <tr>
+      <td>un</td>
+      <td>une</td>
+      <td>155</td>
+    </tr>
+  </table>
+</div>
+<script>
+  /*杨顺涛
+  于2017年4月19日
+  制作完成
+  no copy and paste
+  */
+  var qzone = 0; 
+  function arrange(){
+  	// 找到目标table
+  	var tableId = document.getElementById('tb');
+  	// 总的数组
+  	var totalArray = new Array();
+  	// 单个数组
+  	var nameArray = new Array(),monthArray = new Array(),numArray = new Array();
+  	// 单个数组赋值
+        for(var j=1;j<tableId.rows.length;j++){
+    	nameArray[j-1] =  tableId.rows[j].cells[0].innerHTML;
+    	monthArray[j-1] =  tableId.rows[j].cells[1].innerHTML;
+  		numArray[j-1] =  tableId.rows[j].cells[2].innerHTML;
+  	}
+  	// 单个数组汇总到总的数组
+  	for(var i=1;i<tableId.rows.length;i++){
+  		totalArray.push(new person(nameArray[i-1],monthArray[i-1],numArray[i-1]));
+  	}
+  	// 返回数组排列之后的原位置
+  	var indexArray = new Array();
+  	indexArray = numArray.map((num, index) => ({ num, index })).sort((a, b) => b.num - a.num).map(({ index }) => index + 1);
+  	// 开始重新排列
+  	if(qzone%2==0){  // 偶数次点击
+  		tableId.innerHTML = "<tr><th>name</th><th>month</th><th id='num' title='从小到大排列' onclick='arrange()'>num</th></tr>";
+  		for(var i=0;i<indexArray.length;i++){
+  			tableId.innerHTML += "<tr><td>"+totalArray[indexArray[i]-1].name+"</td><td>"+totalArray[indexArray[i]-1].month+"</td><td>"+totalArray[indexArray[i]-1].num+"</td></tr>";
+  		}
+  		qzone+=1;
+  	}else{  // 奇数次点击
+  		tableId.innerHTML = "<tr><th>name</th><th>month</th><th id='num' title='从大到小排列' onclick='arrange()'>num</th></tr>";
+  		for(var i=0;i<indexArray.length;i++){
+  			tableId.innerHTML += "<tr><td>"+totalArray[indexArray[indexArray.length-i-1]-1].name+"</td><td>"+totalArray[indexArray[indexArray.length-i-1]-1].month+"</td><td>"+totalArray[indexArray[indexArray.length-i-1]-1].num+"</td></tr>";
+  		}
+  		qzone+=1;
+  	}
+  	
+  }
+  function person(name,month,num){
+    this.name = name;
+    this.month = month;
+    this.num = num;
+  }
+</script>
+</body>
