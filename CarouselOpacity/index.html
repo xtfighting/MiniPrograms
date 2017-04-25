@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8">
+<title>see you</title>
+</head>
+<style type="text/css">
+#lunfan{
+}
+#lunfan img{
+	position: absolute;
+}
+</style>
+<body>
+<div id="lunfan">
+	<img src="http://a3.qpic.cn/psb?/V1139r913HKjE6/Eveyslt8KxNuN9JQIs9ju77aa9pbmrx4cokGeSAD*jU!/b/dB8BAAAAAAAA&bo=CAIjAQAAAAARAB8!&rf=viewer_4"/>
+	<img src="http://a1.qpic.cn/psb?/V1139r913HKjE6/L*pHprEKr15yR14IrIWeHwgM5ChWVGuKtxRKwgEZ8Eg!/b/dPYAAAAAAAAA&bo=CAIkAQAAAAARABg!&rf=viewer_4"/>
+	<img src="http://a1.qpic.cn/psb?/V1139r913HKjE6/wljjY4gPTohJWb4ILdVwMYmCY54Wu6Nvazq775KIVGQ!/b/dCABAAAAAAAA&bo=CAIkAQAAAAARABg!&rf=viewer_4"/>
+</div>
+<script type="text/javascript">
+  var imgWidth = 520;  //图片的宽度
+  var imgArray = document.getElementById('lunfan').getElementsByTagName('img');  //获取轮番图所有的图片Array
+  for(var i=0;i<imgArray.length;i++){
+  	if(i>0){
+  		imgArray[i].style.opacity = "0";
+  	}
+  }
+  var disApptimer = null;
+  var Apptimer = null;
+  var totaltime = 1000; //轮番一次时间
+  var speed = 1;  //轮番速度
+  var alpha =100;  
+  goTo(0);
+  function goTo(i){
+  	setTimeout(function(){
+  		disApptimer = setInterval(function(){
+  		    alpha = alpha-speed;
+  	        imgArray[i].style.opacity = alpha/100;
+  	        if(alpha<5){
+  	            clearInterval(disApptimer);
+  	            Appearance(i);
+            }
+  	    },totaltime/100*speed);
+  	},2000);
+  }
+  function Appearance(i){
+  	Apptimer = setInterval(function(){
+  	    alpha = alpha+speed;
+  	    if(i==imgArray.length-1){
+  			imgArray[0].style.opacity = alpha/100;
+  		}else{
+  			imgArray[i+1].style.opacity = alpha/100;
+  		}
+  		if(alpha==100){			      	
+  			clearInterval(Apptimer);
+  			i==imgArray.length-1?goTo(0):goTo(i+1);
+  			
+  		}
+  	},totaltime/100*speed);  	
+  }
+</script>
+</body>
