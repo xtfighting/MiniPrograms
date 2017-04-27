@@ -1,2 +1,2 @@
 # MiniPrograms
-There are some mini programs I made in life.
+There are some mini programs I made in my life.
