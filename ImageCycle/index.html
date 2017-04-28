@@ -11,41 +11,42 @@
 	overflow: hidden;
 }
 #carousel img{
-	margin: 0px;
-	padding:0px;
+	margin: 0;
+	padding:0;
 	position: absolute;
 }
 </style>
 </head>    
 <body>    
 <div id="carousel">
-  <img src="images/a.jpg"/>
-  <img src="images/b.jpg"/>
-  <img src="images/c.jpg"/>
+  <img src="http://a3.qpic.cn/psb?/V1139r913HKjE6/Eveyslt8KxNuN9JQIs9ju77aa9pbmrx4cokGeSAD*jU!/b/dB8BAAAAAAAA&bo=CAIjAQAAAAARAB8!&rf=viewer_4"/>
+<img src="http://a1.qpic.cn/psb?/V1139r913HKjE6/L*pHprEKr15yR14IrIWeHwgM5ChWVGuKtxRKwgEZ8Eg!/b/dPYAAAAAAAAA&bo=CAIkAQAAAAARABg!&rf=viewer_4"/>
+<img src="http://a1.qpic.cn/psb?/V1139r913HKjE6/wljjY4gPTohJWb4ILdVwMYmCY54Wu6Nvazq775KIVGQ!/b/dCABAAAAAAAA&bo=CAIkAQAAAAARABg!&rf=viewer_4"/>
 </div>
 <script type="text/javascript">
  
   var imgWidth = 520;  //图片宽度
+  var speed = 5;  //图片运行速度
+  var pauseTime = 2000;  //图片停顿时间
   var imgArray = document.getElementById('carousel').getElementsByTagName('img'); 
-  var speed = 1;
-  var current = 0;
-  var carouselLength =  imgWidth*imgArray.length;
-  var cycleTime =0;  //循环次数
   for(var i=0;i<imgArray.length;i++){
   	imgArray[i].style.marginLeft = imgWidth*i+'px';
   }
-  var timer = setInterval(function(){
-    for(var j=0;j<imgArray.length;j++){
-      imgArray[j].style.marginLeft = imgWidth*j-current+'px';
-      if(current>carouselLength-imgWidth && j==imgArray.length-1){
-      	imgArray[0].style.marginLeft = carouselLength-current+'px';
-      }
-  	}
-  	current += speed;
-  	console.log(current);
-  	if(current>=carouselLength){
-  	  cycleTime += 1;
-  	}
-  },10);
+  function goTo(i){
+    setTimeout(function(){
+      var current = 0;
+      var timer = setInterval(function(){
+        var next = i==imgArray.length-1?0:i+1;
+        imgArray[i].style.marginLeft = -current+'px';
+        imgArray[next].style.marginLeft = imgWidth-current+'px';
+        current += speed;
+        if(current>imgWidth){
+          clearInterval(timer);
+          goTo(next);
+        }
+      },10/speed);
+    },pauseTime);
+  }
+  goTo(0);
 </script>
 </body>
