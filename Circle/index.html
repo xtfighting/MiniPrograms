@@ -15,19 +15,12 @@
 </head>    
 <body>
 <div id="content">
-	<canvas id="outcircle"></canvas>
+  <canvas id="outcircle"></canvas>
   <canvas id="incircle"></canvas>
 </div>    
 <script type="text/javascript">
-  var c = document.getElementById('outcircle');
+  var c = document.getElementById('incircle');
   var ctx = c.getContext('2d');
-  ctx.beginPath();
-  ctx.arc(100,75,50,0,2*Math.PI);
-  ctx.fillStyle = 'red';
-  ctx.fill();
-  ctx.stroke();
-  c = document.getElementById('incircle');
-  ctx = c.getContext('2d');
   ctx.beginPath();
   ctx.arc(100,75,45,0,2*Math.PI);
   ctx.fillStyle = 'white';
@@ -35,5 +28,19 @@
   ctx.stroke();
   ctx.font='30px Arial';
   ctx.strokeText("hello",70,85);
+  c = document.getElementById('outcircle');
+  ctx = c.getContext('2d');
+  var n=0;  
+  var timer = setInterval(function(){
+    ctx.beginPath();
+    ctx.arc(100,75,50,0,2/100*n*Math.PI);
+    ctx.fillStyle = 'red';
+    ctx.fill();
+    ctx.stroke();
+    n++;
+    if(n>100){
+    	clearInterval(timer);
+    }
+  },100);
 </script>
 </body>
