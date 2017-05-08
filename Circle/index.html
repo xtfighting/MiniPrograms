@@ -3,12 +3,37 @@
 <meta http-equiv="content-type" content="text/html;charset=utf-8">
 <title>circle</title>
 <style type="text/css">
-*{
+#content{
+	width: 100px;
+}
+#content canvas{
 	position: absolute;
+	margin:0px;
+	border:1px solid #fff;
 }
 </style>
 </head>    
-<body>    
-<canvas id="outcircle"></canvas>
-<canvas id="incircle"></canvas>
+<body>
+<div id="content">
+	<canvas id="outcircle"></canvas>
+  <canvas id="incircle"></canvas>
+</div>    
+<script type="text/javascript">
+  var c = document.getElementById('outcircle');
+  var ctx = c.getContext('2d');
+  ctx.beginPath();
+  ctx.arc(100,75,50,0,2*Math.PI);
+  ctx.fillStyle = 'red';
+  ctx.fill();
+  ctx.stroke();
+  c = document.getElementById('incircle');
+  ctx = c.getContext('2d');
+  ctx.beginPath();
+  ctx.arc(100,75,45,0,2*Math.PI);
+  ctx.fillStyle = 'white';
+  ctx.fill();
+  ctx.stroke();
+  ctx.font='30px Arial';
+  ctx.strokeText("hello",70,85);
+</script>
 </body>
